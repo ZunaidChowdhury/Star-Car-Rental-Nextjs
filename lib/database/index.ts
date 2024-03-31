@@ -4,10 +4,18 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 let cached = (global as any).mongoose || { conn: null, promise: null };
 
-export const connectToDatabase = async () => {
-    if (cached.conn) return cached.conn;
+console.log(`database/index/cached: ${cached}`);
 
-    if (!MONGODB_URI) throw new Error('MONGODB_URI is missing');
+export const connectToDatabase = async () => {
+    if (cached.conn) {
+        console.log(`Already connected to database. database/index/cached.conn: ${cached.conn}`);
+        return cached.conn;
+    }
+
+    if (!MONGODB_URI) {
+        console.log(`MONGODB_URI is missing`);
+        throw new Error('MONGODB_URI is missing');
+    }
 
     cached.promise = cached.promise || mongoose.connect(MONGODB_URI, {
         dbName: 'star-car-rental',
@@ -16,5 +24,6 @@ export const connectToDatabase = async () => {
 
     cached.conn = await cached.promise;
 
+    console.log(`New connection to database. database/index/cached.conn: ${cached.conn}`);
     return cached.conn;
 }

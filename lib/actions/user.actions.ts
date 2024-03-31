@@ -11,12 +11,16 @@ import Order from '../database/models/order.model'
 
 export async function createUser(user: CreateUserParams) {
     try {
+        console.log(`user.actions/createUser/ 1`);
         await connectToDatabase()
 
+        console.log(`user.actions/createUser/ 2`);
         const newUser = await User.create(user)
+        console.log(`user.actions/createUser/ 3 / newUser: ${newUser}`);
         return JSON.parse(JSON.stringify(newUser))
     } catch (error) {
-        handleError(error)
+        console.log(`user.actions/createUser/ 4 / error: ${error}`);
+        handleError(error)        
     }
 }
 
