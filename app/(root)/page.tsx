@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { fetchCars } from "@/utils";
+
 import { HomeProps } from "@/types";
 import { fuels, yearsOfProduction } from "@/constants";
 import Hero from "@/components/Hero";
@@ -7,8 +7,11 @@ import SearchBar from "@/components/SearchBar";
 import CustomFilter from "@/components/CustomFilter";
 import CarCard from "@/components/CarCard";
 import ShowMore from "@/components/ShowMore";
+import { fetchCars } from "@/lib/utils";
 
 export default async function Home({ searchParams }: HomeProps) {
+
+  console.log(`root/home`);
 
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || "",
