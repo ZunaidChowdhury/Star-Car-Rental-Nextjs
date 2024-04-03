@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
 
-    console.log(`api/webhook/clerk/ called`);
+    // console.log(`api/webhook/clerk/ called`);
 
     // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
     const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
             photo: image_url,
         }
 
-        console.log(`api/webhook/clerk/ ${user}`);
+        // console.log(`api/webhook/clerk/ ${user}`);
         const newUser = await createUser(user);
 
         if (newUser) {

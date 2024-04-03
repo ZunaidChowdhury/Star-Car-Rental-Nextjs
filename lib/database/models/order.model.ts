@@ -8,7 +8,7 @@ export interface IOrder extends Document {
         _id: string
         title: string
     }
-    buyer: {
+    renter: {
         _id: string
         firstName: string
         lastName: string
@@ -21,7 +21,7 @@ export type IOrderItem = {
     createdAt: Date
     carModelName: string
     carId: string
-    buyer: string
+    renter: string
 }
 
 const OrderSchema = new Schema({
@@ -41,7 +41,7 @@ const OrderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Car',
     },
-    buyer: {
+    renter: {
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
