@@ -77,20 +77,26 @@ export type UpdateUserParams = {
   photo: string
 }
 
-// ====== EVENT PARAMS
-export type CreateEventParams = {
+// ====== CAR PARAMS
+export type CreateCarParams = {
   userId: string
-  event: {
-    title: string
-    description: string
-    location: string
-    imageUrl: string
-    startDateTime: Date
-    endDateTime: Date
-    categoryId: string
-    price: string
-    isFree: boolean
-    url: string
+  car: {
+    make: string;
+    model: string;
+    year: string;
+    picturePath: string;
+    category: string;
+    seats: string;
+    rentalCostPerDay: string;
+    city_MPG: string;
+    highway_MPG: string;
+    combination_MPG: string;
+    fuelType: string;
+    drive: string;
+    cylinders: string;
+    displacement?: string;
+    transmission: string;
+    available_till: Date;
   }
   path: string
 }

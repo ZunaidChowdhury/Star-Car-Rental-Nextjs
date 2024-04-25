@@ -100,3 +100,26 @@ export const manufacturers = [
     },
   ];
   
+
+  export const carDefaultValues = {
+    make: "",
+    model: "",
+    year: "",
+    category: "",
+    seats: "",
+    rentalCostPerDay: "",
+    city_MPG: "",
+    highway_MPG: "",
+    combination_MPG: "",
+    fuelType: "",
+    drive: "",
+    cylinders: "",
+    displacement: "",
+    transmission: "",
+    picturePath: "",
+    available_till: new Date(),
+    // rentEndDateTime: z.date(),
+    // isFree: false,
+    // url: '',
+    
+  }

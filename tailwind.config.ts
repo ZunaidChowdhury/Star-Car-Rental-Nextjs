@@ -86,6 +86,7 @@ module.exports = withUt({
           600: '#545454', // Subdued - color name in figma
           500: '#757575',
           400: '#AFAFAF', // Disabled - color name in figma
+          200: '#e6e6e6',
           50: '#F6F6F6', // White Grey - color name in figma
         },
       },
