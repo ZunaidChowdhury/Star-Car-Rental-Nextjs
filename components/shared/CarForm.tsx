@@ -22,21 +22,28 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Checkbox } from "../ui/checkbox"
 import { useUploadThing } from "@/lib/uploadthing"
 import { useRouter } from "next/navigation"
-import { createCar } from "@/lib/actions/car.actions"
+import { createCar, updateCar } from "@/lib/actions/car.actions"
+import { ICar } from "@/lib/database/models/car.model"
 
 
 
 type CarFormProps = {
   userId: string
   type: "Add" | "Update"
+  car?: ICar
+  carId?: string
 }
 
-const CarForm = ({ userId, type }: CarFormProps) => {
+const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
   console.log("CarForm Called.");
 
   const [files, setFiles] = useState<File[]>([]);
 
-  const initialValues = carDefaultValues;
+  const initialValues = car && type ==="Update"
+  ? {
+    ...car,
+    available_till: new Date(car.available_till)
+  } : carDefaultValues;
 
   const router = useRouter();
   const { startUpload } = useUploadThing('imageUploader')
@@ -69,7 +76,11 @@ const CarForm = ({ userId, type }: CarFormProps) => {
     if (type === 'Add') {
       try {
         const newCar = await createCar({
-          car: { ...values, picturePath: uploadedImageUrl },
+          car: {
+            ...values, 
+            picturePath: uploadedImageUrl,
+            category: values.categoryId,
+          },
           userId,
           path: '/profile'
         })
@@ -85,27 +96,27 @@ const CarForm = ({ userId, type }: CarFormProps) => {
 
 
 
-    // if (type === 'Update') {
-    //   if (!eventId) {
-    //     router.back()
-    //     return;
-    //   }
+    if (type === 'Update') {
+      if (!carId) {
+        router.back()
+        return;
+      }
 
-    //   try {
-    //     const updatedEvent = await updateEvent({
-    //       userId,
-    //       event: { ...values, imageUrl: uploadedImageUrl, _id: eventId },
-    //       path: `/events/${eventId}`
-    //     })
+      try {
+        const updatedCar = await updateCar({
+          userId,
+          car: { ...values, picturePath: uploadedImageUrl, _id: carId, category: values.categoryId },
+          path: `/cars/${carId}`
+        })
 
-    //     if (updatedEvent) {
-    //       form.reset();
-    //       router.push(`/events/${updatedEvent._id}`)
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+        if (updatedCar) {
+          form.reset();
+          router.push(`/cars/${updatedCar._id}`)
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
   }
 
@@ -182,7 +193,7 @@ const CarForm = ({ userId, type }: CarFormProps) => {
           {/* Category */}
           <FormField
             control={form.control}
-            name="category"
+            name="categoryId"
             render={({ field }) => (
               <FormItem className="w-full">
                 <FormControl>

@@ -18,7 +18,7 @@ export const carFormSchema = z.object({
     model: z.string().min(2, 'Model must be at least 2 characters').max(30, 'Model must be less than 30 characters'),
     year: z.string().min(4, 'Year must be 4 digit').max(4, 'Year must be 4 digit'),
     picturePath: z.string(),
-    category: z.string(),
+    categoryId: z.string(),
     seats: z.string().min(1, 'Seats must be 1 digit').max(1, 'Seats must be 1 digit'),
     rentalCostPerDay: z.string(),
     city_MPG: z.string().min(2, 'City MPG must be 2 digit').max(2, 'City MPG must be 2 digit'),

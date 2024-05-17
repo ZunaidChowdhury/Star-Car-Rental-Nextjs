@@ -1,12 +1,20 @@
 import CarForm from '@/components/shared/CarForm'
+import { getCarById } from '@/lib/actions/car.actions';
 import { auth } from '@clerk/nextjs';
 import React from 'react'
 
-const UpdateCar = () => {
+type UpdateCarProps = {
+    params: {
+        id: string
+    }
+}
+
+const UpdateCar = async ({ params: { id } }: UpdateCarProps) => {
 
     const { sessionClaims } = auth();
 
     const userId = sessionClaims?.userId as string;
+    const car = await getCarById(id)
 
     return (
         <>
@@ -15,7 +23,7 @@ const UpdateCar = () => {
             </section>
 
             <div className="wrapper my-8">
-                <CarForm userId={userId} type="Update" />
+                <CarForm userId={userId} type="Update" car={car} carId={car._id} />
             </div>
         </>
     )
