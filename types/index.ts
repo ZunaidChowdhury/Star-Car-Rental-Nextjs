@@ -77,63 +77,75 @@ export type UpdateUserParams = {
   photo: string
 }
 
-// ====== EVENT PARAMS
-export type CreateEventParams = {
+// ====== CAR PARAMS
+export type CreateCarParams = {
   userId: string
-  event: {
-    title: string
-    description: string
-    location: string
-    imageUrl: string
-    startDateTime: Date
-    endDateTime: Date
-    categoryId: string
-    price: string
-    isFree: boolean
-    url: string
+  car: {
+    make: string;
+    model: string;
+    year: string;
+    picturePath: string;
+    category: string;
+    seats: string;
+    rentalCostPerDay: string;
+    city_MPG: string;
+    highway_MPG: string;
+    combination_MPG: string;
+    fuelType: string;
+    drive: string;
+    cylinders: string;
+    displacement?: string;
+    transmission: string;
+    available_till: Date;
   }
   path: string
 }
 
-export type UpdateEventParams = {
+export type UpdateCarParams = {
   userId: string
-  event: {
+  car: {
     _id: string
-    title: string
-    imageUrl: string
-    description: string
-    location: string
-    startDateTime: Date
-    endDateTime: Date
-    categoryId: string
-    price: string
-    isFree: boolean
-    url: string
+    make: string;
+    model: string;
+    year: string;
+    picturePath: string;
+    category: string;
+    seats: string;
+    rentalCostPerDay: string;
+    city_MPG: string;
+    highway_MPG: string;
+    combination_MPG: string;
+    fuelType: string;
+    drive: string;
+    cylinders: string;
+    displacement?: string;
+    transmission: string;
+    available_till: Date;
   }
   path: string
 }
 
-export type DeleteEventParams = {
-  eventId: string
+export type DeleteCarParams = {
+  carId: string
   path: string
 }
 
-export type GetAllEventsParams = {
+export type GetAllCarsParams = {
   query: string
   category: string
   limit: number
   page: number
 }
 
-export type GetEventsByUserParams = {
+export type GetCarsByUserParams = {
   userId: string
   limit?: number
   page: number
 }
 
-export type GetRelatedEventsByCategoryParams = {
+export type GetRelatedCarsByCategoryParams = {
   categoryId: string
-  eventId: string
+  carId: string
   limit?: number
   page: number | string
 }

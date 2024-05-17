@@ -8,10 +8,18 @@ import CustomFilter from "@/components/CustomFilter";
 import CarCard from "@/components/CarCard";
 import ShowMore from "@/components/ShowMore";
 import { fetchCars } from "@/lib/utils";
+import { getAllCars } from "@/lib/actions/car.actions";
+import Collection from "@/components/shared/Collection";
 
 export default async function Home({ searchParams }: HomeProps) {
 
-  console.log(`root/home`);
+  const cars = await getAllCars({
+    query:"",
+    category: "",
+    page: 1,
+    limit: 6
+  })
+  console.log(cars);
 
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || "",
@@ -28,6 +36,27 @@ export default async function Home({ searchParams }: HomeProps) {
 
       <Hero />
 
+      {/* CARS FOR RENT  */}
+      <section id="cars" className="wrapper my-8 flex flex-col gap-8 md:gap-12">
+        <h2 className="h2-bold">Trust by <br /> CARS FOR RENT</h2>
+
+        <div className="flex w-full flex-col gap-5 md:flex-row">
+          {/* <Search />
+          <CategoryFilter /> */}
+        </div>
+
+        <Collection
+          data={cars?.data}
+          emptyTitle="No Events Found"
+          emptyStateSubtext="Come back later"
+          collectionType="All_Cars"
+          limit={6}
+          page={1}
+          totalPages={2}
+        />
+      </section>
+
+      {/* CAR CATALOG  */}
       <div className="mt-12 padding-x padding-y max-width" id="discover">
         {/* Section Title and Description  */}
         <div className="home__text-container">
@@ -53,9 +82,9 @@ export default async function Home({ searchParams }: HomeProps) {
               </div>
 
               <ShowMore
-              pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > allCars.length}
-            />
+                pageNumber={(searchParams.limit || 10) / 10}
+                isNext={(searchParams.limit || 10) > allCars.length}
+              />
             </section>
           ) : (
             <div className="home__error-container">
