@@ -1,3 +1,4 @@
+import CheckoutButton from '@/components/shared/CheckoutButton';
 import Collection from '@/components/shared/Collection';
 import { getCarById, getRelatedCarsByCategory } from '@/lib/actions/car.actions'
 import { formatDateTime } from '@/lib/utils';
@@ -48,6 +49,7 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
             </div>
 
             {/* CHECKOUT  */}
+            <CheckoutButton car={car} />
 
             <div className="flex flex-col gap-5">
               <div className='flex gap-2 md:gap-3'>
