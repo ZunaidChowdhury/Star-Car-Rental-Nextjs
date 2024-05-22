@@ -179,19 +179,18 @@ export type CreateCategoryParams = {
 
 // ====== ORDER PARAMS
 export type CheckoutOrderParams = {
-  eventTitle: string
-  eventId: string
-  price: string
-  isFree: boolean
-  buyerId: string
+  carId: string
+  carModel: string
+  rentalCost: string
+  renterId: string
 }
 
 export type CreateOrderParams = {
   stripeId: string
-  eventId: string
-  buyerId: string
+  carId: string
+  renterId: string
   totalAmount: string
-  createdAt: Date
+  rentedAt: Date
 }
 
 export type GetOrdersByEventParams = {
