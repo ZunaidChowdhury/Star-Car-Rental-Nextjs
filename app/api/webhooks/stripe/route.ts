@@ -26,7 +26,7 @@ export async function POST(request: Request) {
         const order = {
             stripeId: id,
             carId: metadata?.carId || '',
-            renterId: metadata?.buyerId || '',
+            renterId: metadata?.renterId || '',
             totalAmount: amount_total ? (amount_total / 100).toString() : '0',
             rentedAt: new Date(),
         }
