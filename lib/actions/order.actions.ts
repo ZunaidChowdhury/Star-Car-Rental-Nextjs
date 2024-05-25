@@ -43,13 +43,14 @@ export const checkoutOrder = async (order: CheckoutOrderParams) => {
 }
 
 export const createOrder = async (order: CreateOrderParams) => {
+    console.log(`order.actions.ts,   called from createOrder........`)
     try {
         await connectToDatabase();
 
         const newOrder = await Order.create({
             ...order,
-            car: order.carId,
-            renter: order.renterId,
+            carId: order.carId,
+            renterId: order.renterId,
         });
 
         return JSON.parse(JSON.stringify(newOrder));

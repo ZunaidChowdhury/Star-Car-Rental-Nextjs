@@ -1,5 +1,5 @@
 import { ICar } from '@/lib/database/models/car.model'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '../ui/button';
 import { loadStripe } from '@stripe/stripe-js';
 import { checkoutOrder } from '@/lib/actions/order.actions';
@@ -9,7 +9,7 @@ loadStripe(
 );
 
 const Checkout = ({ car, userId }: { car: ICar, userId: string }) => {
-  React.useEffect(() => {
+  useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {
@@ -23,7 +23,8 @@ const Checkout = ({ car, userId }: { car: ICar, userId: string }) => {
   const onCheckout = async () => {
     const order = {
       carId: car._id,
-      carModel: `${car.make} ${car.model}`,
+      // carModel: `${car.make} ${car.model}`,
+      carModel: car.model,
       rentalCost: car.rentalCostPerDay,
       renterId: userId
     }
