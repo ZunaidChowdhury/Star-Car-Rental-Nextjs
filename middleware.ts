@@ -6,14 +6,14 @@ export default authMiddleware({
     '/',
     '/cars/:id',
     '/api/webhooks/clerk',
-    '/api/webhooks/strike',
+    '/api/webhooks/stripe',
     '/api/uploadthing',
   ],
   // Routes that can always be accessed, and have
   // no authentication information
   ignoredRoutes: [
     '/api/webhooks/clerk',
-    '/api/webhooks/strike',
+    '/api/webhooks/stripe',
     '/api/uploadthing',
   ],
 });

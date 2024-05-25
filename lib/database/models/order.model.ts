@@ -1,49 +1,49 @@
 import { Schema, model, models, Document } from 'mongoose'
 
 export interface IOrder extends Document {
-    createdAt: Date
     stripeId: string
-    totalAmount: string
     car: {
         _id: string
-        title: string
+        modelName: string
     }
     renter: {
         _id: string
         firstName: string
         lastName: string
     }
+    totalAmount: string
+    rentedAt: Date
 }
 
 export type IOrderItem = {
     _id: string
-    totalAmount: string
-    createdAt: Date
-    carModelName: string
     carId: string
+    carModelName: string
+    totalAmount: string
+    rentedAt: Date
     renter: string
 }
 
 const OrderSchema = new Schema({
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
     stripeId: {
         type: String,
         required: true,
         unique: true,
     },
-    totalAmount: {
-        type: String,
-    },
-    car: {
+    carId: {
         type: Schema.Types.ObjectId,
         ref: 'Car',
     },
-    renter: {
+    renterId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
+    },
+    totalAmount: {
+        type: String,
+    },
+    rentedAt: {
+        type: Date,
+        default: Date.now,
     },
 })
 
