@@ -30,11 +30,11 @@ const OrderSchema = new Schema({
         required: true,
         unique: true,
     },
-    carId: {
+    car: {
         type: Schema.Types.ObjectId,
         ref: 'Car',
     },
-    renterId: {
+    renter: {
         type: Schema.Types.ObjectId,
         ref: 'User',
     },

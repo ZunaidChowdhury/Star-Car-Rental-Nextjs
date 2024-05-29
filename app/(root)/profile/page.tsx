@@ -1,6 +1,8 @@
 import Collection from '@/components/shared/Collection'
 import { Button } from '@/components/ui/button'
 import { getCarsByUser } from '@/lib/actions/car.actions'
+import { getOrdersByUser } from '@/lib/actions/order.actions'
+import { IOrder } from '@/lib/database/models/order.model'
 import { auth } from '@clerk/nextjs'
 import Link from 'next/link'
 import React from 'react'
@@ -10,6 +12,13 @@ const Profile = async () => {
     const userId = sessionClaims?.userId as string;
 
     const addedCars = await getCarsByUser({ userId, page: 1 })
+
+    const orders = await getOrdersByUser({ userId, page: 1})
+    // console.log(`profile/orders:`);
+    // // console.log(orders);
+    // const orderedCars = orders?.data.map((order: IOrder) => order.car) || [];
+    // console.log(orderedCars);
+
     return (
         <>
             {/* My Rented Cars */}
@@ -26,13 +35,13 @@ const Profile = async () => {
 
             <section className="wrapper my-8">
                 {/* <Collection
-                    data={cars?.data}
+                    data={orderedCars}
                     emptyTitle="No car rented yet!"
                     emptyStateSubtext="No worries - plenty of cool cars to explore!"
                     collectionType="My_Cars"
                     limit={3}
-                    page={rentedPage}
-                    urlParamName="rentedPage"
+                    page={1}
+                    urlParamName="ordersPage"
                     totalPages={2}
                 /> */}
             </section>

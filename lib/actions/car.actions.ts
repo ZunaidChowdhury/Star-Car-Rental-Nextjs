@@ -145,7 +145,9 @@ export async function getCarsByUser({ userId, limit = 6, page }: GetCarsByUserPa
             .skip(skipAmount)
             .limit(limit)
 
+
         const cars = await populateCar(carsQuery)
+
         const carsCount = await Car.countDocuments(conditions)
 
         return { data: JSON.parse(JSON.stringify(cars)), totalPages: Math.ceil(carsCount / limit) }

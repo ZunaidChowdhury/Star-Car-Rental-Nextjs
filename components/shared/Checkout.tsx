@@ -22,11 +22,11 @@ const Checkout = ({ car, userId }: { car: ICar, userId: string }) => {
   }, []);
   const onCheckout = async () => {
     const order = {
-      carId: car._id,
-      // carModel: `${car.make} ${car.model}`,
-      carModel: car.model,
+      car: car._id,
+      carModelName: `${car.make} ${car.model}`,
+      // carModel: car.model,
       rentalCost: car.rentalCostPerDay,
-      renterId: userId
+      renter: userId
     }
     await checkoutOrder(order);
   }
