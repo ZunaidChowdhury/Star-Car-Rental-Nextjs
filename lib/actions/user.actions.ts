@@ -70,7 +70,7 @@ export async function deleteUser(clerkId: string) {
             ),
 
             // Update the 'orders' collection to remove references to the user
-            Order.updateMany({ _id: { $in: userToDelete.orders } }, { $unset: { buyer: 1 } }),
+            Order.updateMany({ _id: { $in: userToDelete.orders } }, { $unset: { renter: 1 } }),
         ])
 
         // Delete user
