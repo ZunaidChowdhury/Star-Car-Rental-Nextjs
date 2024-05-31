@@ -16,8 +16,8 @@ const Profile = async () => {
     const orders = await getOrdersByUser({ userId, page: 1})
     // console.log(`profile/orders:`);
     // // console.log(orders);
-    // const orderedCars = orders?.data.map((order: IOrder) => order.car) || [];
-    // console.log(orderedCars);
+    const orderedCars = orders?.data.map((order: IOrder) => order.car) || [];
+    console.log(orderedCars);
 
     return (
         <>
@@ -34,7 +34,7 @@ const Profile = async () => {
             </section>
 
             <section className="wrapper my-8">
-                {/* <Collection
+                <Collection
                     data={orderedCars}
                     emptyTitle="No car rented yet!"
                     emptyStateSubtext="No worries - plenty of cool cars to explore!"
@@ -43,7 +43,7 @@ const Profile = async () => {
                     page={1}
                     urlParamName="ordersPage"
                     totalPages={2}
-                /> */}
+                />
             </section>
 
             {/* My Added Cars */}
