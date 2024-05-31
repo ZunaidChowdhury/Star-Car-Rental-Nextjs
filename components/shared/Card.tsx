@@ -55,7 +55,7 @@ const Card = ({ car, hasOrderLink, hidePrice }: CardProps) => {
                 </p>
 
                 <Link href={`/cars/${car._id}`}>
-                    <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">{car.title}</p>
+                    <p className="p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black">{`${car.make} ${car.model}`}</p>
                 </Link>
 
                 <div className="flex-between w-full">
