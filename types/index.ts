@@ -38,7 +38,7 @@ export interface FilterProps {
   fuel?: string;
 }
 
-export interface HomeProps {
+export type HomeProps = {
   searchParams: FilterProps;
 }
 
@@ -219,4 +219,5 @@ export type RemoveUrlQueryParams = {
 export type SearchParamProps = {
   params: { id: string }
   searchParams: { [key: string]: string | string[] | undefined }
+  // searchParams2: FilterProps;
 }

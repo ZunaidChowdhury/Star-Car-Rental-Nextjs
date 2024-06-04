@@ -46,16 +46,24 @@ export async function getCarById(carId: string) {
     }
 }
 
+const getCategoryByName = async (name: string) => {
+    return Category.findOne({ name: { $regex: name, $options: 'i' } })
+  }
 // GET ONE CAR BY ID
 export async function getAllCars({ query, limit = 6, page, category }: GetAllCarsParams) {
     try {
         await connectToDatabase()
 
-        const conditions = {};
+        const titleCondition = query ? { model: { $regex: query, $options: 'i' } } : {}
+        const categoryCondition = category ? await getCategoryByName(category) : null
+        const conditions = {
+            $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],
+        }
 
+        const skipAmount = (Number(page) - 1) * limit
         const carsQuery = Car.find(conditions)
             .sort({ createdAt: 'desc' })
-            .skip(0)
+            .skip(skipAmount)
             .limit(limit)
 
         const cars = await populateCar(carsQuery)
