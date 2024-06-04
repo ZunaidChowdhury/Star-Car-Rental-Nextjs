@@ -62,56 +62,66 @@ export const createOrder = async (order: CreateOrderParams) => {
 }
 
 
-// GET ORDERS BY EVENT
-export async function getOrdersByEvent({ searchString, carId }: GetOrdersByCarParams) {
+// GET ORDERS BY CAR
+export async function getOrdersByCar({ searchString, carId }: GetOrdersByCarParams) {
+
     try {
         await connectToDatabase()
 
-        if (!carId) throw new Error('Event ID is required')
-        const eventObjectId = new ObjectId(carId)
+        if (!carId) throw new Error('Car ID is required')
+        const carObjectId = new ObjectId(carId)
 
         const orders = await Order.aggregate([
             {
                 $lookup: {
                     from: 'users',
-                    localField: 'buyer',
+                    localField: 'renter',
                     foreignField: '_id',
-                    as: 'buyer',
+                    as: 'renter',
                 },
             },
             {
-                $unwind: '$buyer',
+                $unwind: {
+                    path: '$renter',
+                }
+                
             },
             {
                 $lookup: {
-                    from: 'events',
-                    localField: 'event',
+                    from: 'cars',
+                    localField: 'car',
                     foreignField: '_id',
-                    as: 'event',
+                    as: 'car',
                 },
             },
             {
-                $unwind: '$event',
+                $unwind: {
+                    path: '$car',
+                }
             },
             {
                 $project: {
                     _id: 1,
                     totalAmount: 1,
-                    createdAt: 1,
-                    eventTitle: '$event.title',
-                    eventId: '$event._id',
-                    buyer: {
-                        $concat: ['$buyer.firstName', ' ', '$buyer.lastName'],
+                    rentedAt: 1,
+                    // carModelName: `${'$car.make'} ${'$car.model'}`,
+                    carModelName: {
+                        $concat: ['$car.make', ' ', '$car.model'],
+                    },
+                    carId: '$car._id',
+                    renter: {
+                        $concat: ['$renter.firstName', ' ', '$renter.lastName'],
                     },
                 },
             },
-            {
-                $match: {
-                    $and: [{ eventId: eventObjectId }, { buyer: { $regex: RegExp(searchString, 'i') } }],
-                },
-            },
+            // {
+            //     $match: {
+            //         $and: [{ carId: carObjectId }, { renter: { $regex: RegExp(searchString, 'i') } }],
+            //     },
+            // },
         ])
-
+        // console.log(`order 2`)
+        // console.log(orders)
         return JSON.parse(JSON.stringify(orders))
     } catch (error) {
         handleError(error)
@@ -209,7 +219,7 @@ export async function getOrdersByEvent({ searchString, carId }: GetOrdersByCarPa
 
 
 
-// const orders = await Order.find({ renterId: new ObjectId(userId!) })
+
 // GET ORDERS BY USER
 export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUserParams) {
 

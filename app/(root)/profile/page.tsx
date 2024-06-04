@@ -3,21 +3,26 @@ import { Button } from '@/components/ui/button'
 import { getCarsByUser } from '@/lib/actions/car.actions'
 import { getOrdersByUser } from '@/lib/actions/order.actions'
 import { IOrder } from '@/lib/database/models/order.model'
+import { SearchParamProps } from '@/types'
 import { auth } from '@clerk/nextjs'
 import Link from 'next/link'
 import React from 'react'
 
-const Profile = async () => {
+const Profile = async ({ searchParams }: SearchParamProps) => {
     const { sessionClaims } = auth();
     const userId = sessionClaims?.userId as string;
 
-    const addedCars = await getCarsByUser({ userId, page: 1 })
+    const ordersPage = Number(searchParams?.ordersPage) || 1;
+    const carsPage = Number(searchParams?.carsPage) || 1;
 
-    const orders = await getOrdersByUser({ userId, page: 1})
-    // console.log(`profile/orders:`);
-    // // console.log(orders);
+    const addedCars = await getCarsByUser({ userId, page: carsPage })
+
+    const orders = await getOrdersByUser({ userId, page: ordersPage})
+
     const orderedCars = orders?.data.map((order: IOrder) => order.car) || [];
-    console.log(orderedCars);
+    // console.log(orderedCars);
+
+
 
     return (
         <>
@@ -40,9 +45,9 @@ const Profile = async () => {
                     emptyStateSubtext="No worries - plenty of cool cars to explore!"
                     collectionType="My_Cars"
                     limit={3}
-                    page={1}
+                    page={ordersPage}
                     urlParamName="ordersPage"
-                    totalPages={2}
+                    totalPages={orders?.totalPages}
                 />
             </section>
 
@@ -64,10 +69,10 @@ const Profile = async () => {
                     emptyTitle="No cars have been created yet!"
                     emptyStateSubtext="Go create one now"
                     collectionType="Cars_Added"
-                    limit={6}
-                    page={1}
+                    limit={3}
+                    page={carsPage}
                     urlParamName="carsPage"
-                    totalPages={2}
+                    totalPages={addedCars?.totalPages}
                 />
             </section>
         </>

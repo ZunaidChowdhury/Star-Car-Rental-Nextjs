@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { HomeProps } from "@/types";
+import { SearchParamProps } from "@/types";
 import { fuels, yearsOfProduction } from "@/constants";
 import Hero from "@/components/Hero";
 import SearchBar from "@/components/SearchBar";
@@ -10,23 +10,28 @@ import ShowMore from "@/components/ShowMore";
 import { fetchCars } from "@/lib/utils";
 import { getAllCars } from "@/lib/actions/car.actions";
 import Collection from "@/components/shared/Collection";
+import Search from "@/components/shared/Search";
+import CategoryFilter from "@/components/shared/CategoryFilter";
 
-export default async function Home({ searchParams }: HomeProps) {
+export default async function Home({ searchParams }: SearchParamProps) {
+
+  const page = Number(searchParams?.page) || 1;
+  const searchText = (searchParams?.query as string) || '';
+  const category = (searchParams?.category as string) || '';
 
   const cars = await getAllCars({
-    query:"",
-    category: "",
-    page: 1,
+    query: searchText,
+    category,
+    page,
     limit: 6
   })
-  console.log(cars);
 
   const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year || 2022,
-    fuel: searchParams.fuel || "",
-    limit: searchParams.limit || 10,
-    model: searchParams.model || "",
+    manufacturer: searchParams.manufacturer as string || "",
+    year: Number(searchParams.year) || 2022,
+    fuel: searchParams.fuel as string || "",
+    limit: Number(searchParams.limit) || 10,
+    model: searchParams.model as string || "",
   });
   // console.log(allCars);
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
@@ -38,11 +43,11 @@ export default async function Home({ searchParams }: HomeProps) {
 
       {/* CARS FOR RENT  */}
       <section id="cars" className="wrapper my-8 flex flex-col gap-8 md:gap-12">
-        <h2 className="h2-bold">Trust by <br /> CARS FOR RENT</h2>
+        <h2 className="h2-bold">CARS FOR RENT</h2>
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
-          {/* <Search />
-          <CategoryFilter /> */}
+          <Search />
+          <CategoryFilter />
         </div>
 
         <Collection
@@ -51,8 +56,8 @@ export default async function Home({ searchParams }: HomeProps) {
           emptyStateSubtext="Come back later"
           collectionType="All_Cars"
           limit={6}
-          page={1}
-          totalPages={2}
+          page={page}
+          totalPages={cars?.totalPages}
         />
       </section>
 
@@ -82,13 +87,13 @@ export default async function Home({ searchParams }: HomeProps) {
               </div>
 
               <ShowMore
-                pageNumber={(searchParams.limit || 10) / 10}
-                isNext={(searchParams.limit || 10) > allCars.length}
+                pageNumber={(Number(searchParams.limit) || 10) / 10}
+                isNext={(Number(searchParams.limit) || 10) > allCars.length}
               />
             </section>
           ) : (
             <div className="home__error-container">
-              <h2 className="text-black text-xl font-bold">Oops, no results</h2>
+              <h2 className="text-black text-xl font-bold text-center">Oops, no results</h2>
               <p>{allCars?.message}</p>
             </div>
           )}
