@@ -12,6 +12,7 @@ import { getAllCars } from "@/lib/actions/car.actions";
 import Collection from "@/components/shared/Collection";
 import Search from "@/components/shared/Search";
 import CategoryFilter from "@/components/shared/CategoryFilter";
+import ImageSlider from "@/components/shared/ImageSlider";
 
 export default async function Home({ searchParams }: SearchParamProps) {
 
@@ -39,11 +40,19 @@ export default async function Home({ searchParams }: SearchParamProps) {
   return (
     <div className="overflow-hidden">
 
-      <Hero />
+      {/* <Hero /> */}
+      <div className="w-full  h-[75px] bg-black"></div>
+      <ImageSlider
+        title="Bangladesh's #1 Luxury Car Rental"
+        subtitle="DRIVEN BY LUXURY"
+        description="Rent your dream car on daily or hourly basis."
+        titleColor="text-theme-primary"
+        subtitleColor="text-white"
+      />
 
       {/* CARS FOR RENT  */}
       <section id="cars" className="wrapper my-8 flex flex-col gap-8 md:gap-12">
-        <h2 className="h2-bold">CARS FOR RENT</h2>
+        <h2 className="h2-bold text-center">CARS FOR RENT</h2>
 
         <div className="flex w-full flex-col gap-5 md:flex-row">
           <Search />

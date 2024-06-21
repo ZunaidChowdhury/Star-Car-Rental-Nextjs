@@ -69,7 +69,7 @@ module.exports = withUt({
 
         // ======================================================================== more custom color props
         "theme-primary": {
-          DEFAULT: "#77b300",
+          DEFAULT: "#705CF6",
           // 100: "#F5F8FF",
         },
         "black-100": "#2B2C35",
