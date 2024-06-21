@@ -11,10 +11,11 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: 'Star Car Rental',
-  description: 'Discover best cars to rent.',
+  description: `Bangladesh's #1 Luxury Car Rental`,
+  // Setting Icon
   icons: {
-    icon: '/assets/images/logo.svg'
-  },
+    icon: '/mine/StarCarRental-logo-S.png'
+  }
 }
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={poppins.variable}>
+      <body className={`${poppins.variable} bg-[#f2f2f2]`}>
         {/* <NavBar /> */}
         {children}
         {/* <Footer /> */}

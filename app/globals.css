@@ -17,6 +17,7 @@
     --popover-foreground: 222.2 84% 4.9%;
  
     --primary: 222.2 47.4% 11.2%;
+    /* --primary: 60, 81.82%, 43.14%; */
     --primary-foreground: 210 40% 98%;
  
     --secondary: 210 40% 96.1%;
@@ -39,7 +40,10 @@
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
+    /* --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%; */
+
+    --background: 248, 90%, 66%;
     --foreground: 210 40% 98%;
  
     --card: 222.2 84% 4.9%;
@@ -108,11 +112,15 @@ body {
 
 /* Mine Start*/
 .nav-menu-item {
-  @apply text-white hover:text-theme-primary border-b-4 border-transparent hover:border-theme-primary transition duration-300 px-4 py-2
+  @apply text-gray-300 hover:text-theme-primary border-b-4 border-transparent hover:border-theme-primary transition duration-300 px-4 py-2
 }
 
 .nav-menu-item-mobile {
-  @apply bg-transparent hover:bg-green-800 transition duration-300 p-4 text-white
+  @apply bg-transparent hover:bg-theme-primary transition duration-300 p-4 text-gray-300
+}
+
+.nav-menu-dropdown-item {
+  @apply ml-0 mr-6 pl-4 focus:bg-theme-primary focus:text-gray-300
 }
 /* Mine End*/
 
