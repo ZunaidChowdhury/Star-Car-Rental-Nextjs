@@ -162,7 +162,7 @@ const NavItems = ({ isMobileScreen }: INavItemsProps) => {
                     </ul >
                 ) : (
                     // desktop
-                    <ul className="hidden lg:flex justify-center items-center lg:space-x-4 w-full max-w-[805px]">
+                    <ul className="hidden lg:flex flex-wrap justify-center items-center lg:space-x-4 w-full max-w-[805px]">
                         <li>
                             <Link href="/" className="nav-menu-item">Home</Link>
                         </li >

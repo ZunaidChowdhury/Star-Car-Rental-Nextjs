@@ -38,11 +38,11 @@ const ImageSlider = ({ images, title, subtitle, description, titleColor, subtitl
             <div className='absolute inset-0 bg-black opacity-50'></div>
             <div className='absolute inset-0 flex flex-col justify-center items-center'>
                 {/* Subtitle  */}
-                <h2 className={`${subtitleColor} text-[26px] font-extrabold tracking-widest`} >{subtitle}</h2>
+                <h2 className={`${subtitleColor} text-center text-[18px] sm:text-[20px] md:text-[23px] lg:text-[25px] xl:text-[28px] font-extrabold tracking-widest`} >{subtitle}</h2>
                 {/* Title  */}
-                <h1 className={`${titleColor} text-[64px] font-extrabold`}>{title}</h1>
+                <h1 className={`${titleColor} text-center text-[30px] sm:text-[33px] md:text-[40px] lg:text-[50px] xl:text-[64px] font-extrabold`}>{title}</h1>
                 {/* Description  */}
-                <p className='text-white mt-2 mb-8 text-[22px]'>{description}</p>
+                <p className=' text-center text-white mt-2 mb-8 sm:text-[16px] md:text-[20px]  lg:text-[25px] xl:text-[22px]'>{description}</p>
                 {/* Button  */}
                 <Button >Rent Now</Button>
             </div>
