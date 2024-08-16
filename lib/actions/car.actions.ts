@@ -10,21 +10,18 @@ import { handleError } from "../utils"
 
 const populateCar = (query: any) => {
     return query
-        .populate({ path: 'carBy', model: User, select: '_id firstName lastName' })
-        .populate({ path: 'category', model: Category, select: '_id name' })
+    .populate({ path: 'carBy', model: User, select: '_id firstName lastName' })
+    .populate({ path: 'category', model: Category, select: '_id name' })
 }
 
 // CREATE
 export async function createCar({ userId, car, path }: CreateCarParams) {
     try {
         await connectToDatabase()
-
         const carOwner = await User.findById(userId)
         if (!carOwner) throw new Error('Car owner not found')
-
         const newCar = await Car.create({ ...car, category: car.category, carBy: userId })
         revalidatePath(path)
-
         return JSON.parse(JSON.stringify(newCar))
     } catch (error) {
         handleError(error)
@@ -35,16 +32,14 @@ export async function createCar({ userId, car, path }: CreateCarParams) {
 export async function getCarById(carId: string) {
     try {
         await connectToDatabase()
-
         const car = await populateCar(Car.findById(carId))
-
         if (!car) throw new Error('Car not found')
-
         return JSON.parse(JSON.stringify(car))
     } catch (error) {
         handleError(error)
     }
 }
+
 
 const getCategoryByName = async (name: string) => {
     return Category.findOne({ name: { $regex: name, $options: 'i' } })
@@ -54,7 +49,16 @@ export async function getAllCars({ query, limit = 6, page, category }: GetAllCar
     try {
         await connectToDatabase()
 
-        const titleCondition = query ? { model: { $regex: query, $options: 'i' } } : {}
+        const titleCondition = query ? 
+        { 
+            // model: { $regex: query, $options: 'i' }
+            $or: [
+                { make: { $regex: query, $options: 'i' } },
+                { model: { $regex: query, $options: 'i' } }
+            ]
+        } 
+        : 
+        {}
         const categoryCondition = category ? await getCategoryByName(category) : null
         const conditions = {
             $and: [titleCondition, categoryCondition ? { category: categoryCondition._id } : {}],

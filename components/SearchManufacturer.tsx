@@ -14,8 +14,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManuFacture
     query === ""
       ? manufacturers
       : manufacturers.filter((item) =>
-          item
-            .toLowerCase()
+          item.name.toLowerCase()
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
@@ -65,7 +64,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManuFacture
               ) : (
                 filteredManufacturers.map((item) => (
                   <Combobox.Option
-                    key={item}
+                    key={item.name}
                     className={({ active }) =>
                       `relative search-manufacturer__option ${
                         active ? "bg-primary-blue text-white" : "text-gray-900"
@@ -76,7 +75,7 @@ const SearchManufacturer = ({ manufacturer, setManufacturer }: SearchManuFacture
                     {({ selected, active }) => (
                       <>
                         <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                          {item}
+                          {item.name}
                         </span>
 
                         {/* Show an active blue background color if the option is selected */}

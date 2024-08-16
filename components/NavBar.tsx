@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -6,10 +8,12 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import MobileNav from "./MobileNav";
 import NavItems from "./NavItems";
+import { DotIcon } from "lucide-react";
+import Profile from "@/app/(root)/profile/page";
 
 const NavBar = () => (
-  <header className='w-full z-10 bg-black fixed top-0 border-b-2 border-theme-primary'>
-    <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4'>
+  <header className='w-full z-50 bg-black border-b-2 border-theme-primary'>
+    <nav className='max-w-[1440px] w-[80%] mx-auto flex justify-between items-center  py-4'>
       {/* logo */}
       <Link href='/' className='flex justify-center items-center'>
         <Image
@@ -34,6 +38,7 @@ const NavBar = () => (
           <UserButton afterSignOutUrl="/" />
           <MobileNav />
         </SignedIn>
+
         <SignedOut>
           <Button asChild className="rounded-full" size="lg">
             <Link href="/sign-in">Sign in</Link>

@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
-      <body className={`${poppins.variable} bg-[#f2f2f2]`}>
+      <body className={`${poppins.variable} relative bg-[#f2f2f2]`}>
         {/* <NavBar /> */}
         {children}
         {/* <Footer /> */}

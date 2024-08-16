@@ -28,7 +28,7 @@ export default function CustomFilter({ title, options }: CustomFilterProps) {
           handleUpdateParams(e); // Update the URL search parameters and navigate to the new URL
         }}
       >
-        <div className='relative w-fit z-10'>
+        <div className='relative w-fit'>
           {/* Button for the listbox */}
           <Listbox.Button className='custom-filter__btn'>
             <span className='block truncate'>{selected.title}</span>
@@ -47,8 +47,7 @@ export default function CustomFilter({ title, options }: CustomFilterProps) {
                 <Listbox.Option
                   key={option.title}
                   className={({ active }) =>
-                    `relative cursor-default select-none py-2 px-4 ${
-                      active ? "bg-primary-blue text-white" : "text-gray-900"
+                    `relative cursor-default select-none py-2 px-4 ${active ? "bg-theme-primary text-white" : "text-gray-900"
                     }`
                   }
                   value={option}

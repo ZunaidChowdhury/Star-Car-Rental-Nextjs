@@ -221,3 +221,21 @@ export type SearchParamProps = {
   searchParams: { [key: string]: string | string[] | undefined }
   // searchParams2: FilterProps;
 }
+
+export type IconProps = {
+  color?: string
+  width?: string;
+  height?: string
+};
+
+type BlockData = {
+  icon: React.FC
+  title: string
+  description: string
+}
+
+export type SimpleBlocksProps = {
+  data: BlockData[]
+  layoutStyle: number
+
+}

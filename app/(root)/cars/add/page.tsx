@@ -7,7 +7,7 @@ const AddCar = () => {
   const { sessionClaims } = auth();
 
   const userId = sessionClaims?.userId as string;
-  console.log(`AddCar/userId: ${userId}`)
+  // console.log(`AddCar/userId: ${userId}`)
 
   return (
     <>

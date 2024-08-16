@@ -5,6 +5,9 @@ export default authMiddleware({
   publicRoutes: [
     '/',
     '/cars/:id',
+    '/category/:id',
+    '/contact',
+    '/blogs',
     '/api/webhooks/clerk',
     '/api/webhooks/stripe',
     '/api/uploadthing',
