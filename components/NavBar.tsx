@@ -11,6 +11,7 @@ const NavBar = () => (
   <header className='w-full z-10 bg-black fixed top-0 border-b-2 border-theme-primary'>
     <nav className='max-w-[1440px] mx-auto flex justify-between items-center sm:px-16 px-6 py-4'>
       {/* logo */}
+      <div className="w-[150px]">
       <Link href='/' className='flex justify-center items-center'>
         <Image
           src='/mine/StarCarRental-logo.png'
@@ -20,11 +21,12 @@ const NavBar = () => (
           className='object-contain'
         />
       </Link>
+      </div>
 
       {/* Navbar Links */}
       <NavItems isMobileScreen={false} />
 
-      <div className="flex justify-space items-center">
+      <div className="w-[150px] flex justify-end items-center">
         {/* <CustomButton
         title='Sign in'
         btnType='button'
