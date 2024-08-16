@@ -47,7 +47,7 @@ const LogoCarousel: React.FC<CarouselProps> = ({ images }) => {
     return (
         <div className="relative w-full flex flex-col justify-center">
             {/* Slides */}
-            <div className='w-[1400px] relative flex overflow-hidden mx-auto'>
+            <div className='w-full max-w-[1400px] relative flex overflow-hidden mx-auto'>
                 <button
                     onClick={handlePrevious}
                     className="text-[50px] z-10 absolute left-0 top-1/2 transform -translate-y-1/2 text-black px-4 py-2 rounded-full"
@@ -107,43 +107,3 @@ const LogoCarousel: React.FC<CarouselProps> = ({ images }) => {
 };
 
 export default LogoCarousel;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// {/* Slides */}
-// <div className='w-[1400px]   flex  overflow-hidden'>
-//     {images.map((image, index) => (
-//         <div
-//             className="relative bg-black left-2/4 transition-transform duration-500 ease-in-out"
-//             style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
-//             <img
-//                 key={index}
-//                 src={image}
-//                 alt={`Slide ${index}`}
-//                 className="w-[100px] h-64 object-contain"
-//             />
-//         </div>
-//     ))}
-// </div>

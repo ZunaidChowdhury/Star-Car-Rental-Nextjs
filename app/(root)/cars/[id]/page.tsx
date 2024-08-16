@@ -21,21 +21,21 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
     <>
       <section className="w-full bg-primary-50 ">
         {/* wrapper  */}
-        <div className="flex w-[1280px] mx-auto pt-[40px] pb-[40px]">
+        <div className="flex flex-col xl:flex-row items-center w-full max-w-[1280px] mx-auto pt-[40px] pb-[40px]">
           {/* image block */}
-          <div className="w-[800px] h-[600px] bg-cover bg-center">
+          <div className="w-full h-[600px] max-w-[500px] sm:max-w-[600px] md:max-w-[720px] lg:max-w-[800px]">
             <div style={{ backgroundImage: `url(${car.picturePath})` }}
-              className="w-[800px] h-[600px] bg-cover bg-center" />
+              className="w-full h-full bg-cover bg-center" />
           </div>
 
           {/* text block */}
-          <div className='w-full ml-10 flex flex-col'>
+          <div className='w-full flex-1 max-w-[420px] ml-10 flex flex-col overflow-hidden'>
 
             <h2 className='font-bold text-[30px] mt-10'>{`${car.make} ${car.model}`}</h2>
 
-            <div className='flex w-full mt-10'>
+            <div className='flex justify-between mt-10'>
               {/* single element */}
-              <div className=''>
+              <div>
                 <p className='text-gray-500 text-[16px]'>Make</p>
                 <div className='w-[200px] h-[40px] mt-1 flex border border-gray items-center'>
                   <div className='ml-3 mb-[2px]'>
@@ -44,7 +44,7 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
                   <h3 className='font-medium text-[16px] ml-2'>{car.make}</h3>
                 </div>
               </div>
-              <div className='ml-6'>
+              <div>
                 <p className='text-gray-500 text-[16px]'>Model Year</p>
                 <div className='w-[200px] h-[40px] mt-1 flex border border-gray items-center'>
                   <div className='ml-3 mb-[2px]'>
@@ -55,9 +55,9 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
               </div>
             </div>
 
-            <div className='flex w-full mt-5'>
+            <div className='flex justify-between mt-5'>
               {/* single element */}
-              <div className=''>
+              <div>
                 <p className='text-gray-500 text-[16px]'>Seats</p>
                 <div className='w-[200px] h-[40px] mt-1 flex border border-gray items-center'>
                   <div className='ml-3 mb-[2px]'>
@@ -66,7 +66,7 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
                   <h3 className='font-medium text-[16px] ml-2'>{car.seats}</h3>
                 </div>
               </div>
-              <div className='ml-6'>
+              <div>
                 <p className='text-gray-500 text-[16px]'>Highway MPG</p>
                 <div className='w-[200px] h-[40px] mt-1 flex border border-gray items-center'>
                   <div className='ml-3 mb-[2px]'>
@@ -77,9 +77,9 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
               </div>
             </div>
 
-            <div className='flex w-full mt-5'>
+            <div className='flex justify-between mt-5'>
               {/* single element */}
-              <div className=''>
+              <div>
                 <p className='text-gray-500 text-[16px]'>Fuel Type</p>
                 <div className='w-[200px] h-[40px] mt-1 flex border border-gray items-center'>
                   <div className='ml-3 mb-[2px]'>
@@ -88,7 +88,7 @@ const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) =>
                   <h3 className='font-medium text-[16px] ml-2'>{car.fuelType}</h3>
                 </div>
               </div>
-              <div className='ml-6'>
+              <div>
                 <p className='text-gray-500 text-[16px]'>Drive</p>
                 <div className='w-[200px] h-[40px] mt-1 flex border border-gray items-center'>
                   <div className='ml-3 mb-[2px]'>
