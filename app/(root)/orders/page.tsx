@@ -14,12 +14,12 @@ const OrdersPage = async ({ searchParams }: SearchParamProps) => {
 
     return (
         <>
-            <section className=" bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+            <section className=" bg-primary-50 py-1 md:py-2">
                 <h3 className="wrapper h3-bold text-center sm:text-left ">Orders</h3>
             </section>
 
             <section className="wrapper mt-8">
-                <Search />
+                <Search placeholder='Search Renters ...' />
             </section>
 
             <section className="wrapper overflow-x-auto">

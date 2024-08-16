@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '../ui/button';
 
 export type ImageSliderProps = {
+    images: string[],
     title: string,
     subtitle?: string,
     description: string,
@@ -10,15 +11,7 @@ export type ImageSliderProps = {
     subtitleColor?: string,
 }
 
-const images = [
-    '/mine/cars/slide1/img1.jpg',
-    '/mine/cars/slide1/img2.jpg',
-    '/mine/cars/slide1/img3.jpg',
-    '/mine/cars/slide1/img4.jpg',
-
-];
-
-const ImageSlider = ({ title, subtitle, description, titleColor, subtitleColor }: ImageSliderProps) => {
+const ImageSlider = ({ images, title, subtitle, description, titleColor, subtitleColor }: ImageSliderProps) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
@@ -30,7 +23,7 @@ const ImageSlider = ({ title, subtitle, description, titleColor, subtitleColor }
 
 
     return (
-        <div className="relative w-full h-[600px] overflow-hidden">
+        <div className="relative w-full h-[700px] overflow-hidden">
             {images.map((image, index) => (
                 <div
                     key={index}

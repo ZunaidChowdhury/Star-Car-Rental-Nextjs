@@ -39,11 +39,11 @@ const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
 
   const [files, setFiles] = useState<File[]>([]);
 
-  const initialValues = car && type ==="Update"
-  ? {
-    ...car,
-    available_till: new Date(car.available_till)
-  } : carDefaultValues;
+  const initialValues = car && type === "Update"
+    ? {
+      ...car,
+      available_till: new Date(car.available_till)
+    } : carDefaultValues;
 
   const router = useRouter();
   const { startUpload } = useUploadThing('imageUploader')
@@ -62,14 +62,11 @@ const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
     console.log(values);
 
     let uploadedImageUrl = values.picturePath;
-
     if (files.length > 0) {
       const uploadedImages = await startUpload(files)
-
       if (!uploadedImages) {
         return
       }
-
       uploadedImageUrl = uploadedImages[0].url
     }
 
@@ -77,14 +74,13 @@ const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
       try {
         const newCar = await createCar({
           car: {
-            ...values, 
+            ...values,
             picturePath: uploadedImageUrl,
             category: values.categoryId,
           },
           userId,
           path: '/profile'
         })
-
         if (newCar) {
           form.reset();
           router.push(`/cars/${newCar._id}`)
@@ -94,21 +90,17 @@ const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
       }
     }
 
-
-
     if (type === 'Update') {
       if (!carId) {
         router.back()
         return;
       }
-
       try {
         const updatedCar = await updateCar({
           userId,
           car: { ...values, picturePath: uploadedImageUrl, _id: carId, category: values.categoryId },
           path: `/cars/${carId}`
         })
-
         if (updatedCar) {
           form.reset();
           router.push(`/cars/${updatedCar._id}`)
@@ -117,7 +109,6 @@ const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
         console.log(error);
       }
     }
-
   }
 
   return (
@@ -514,7 +505,8 @@ const CarForm = ({ userId, type, car, carId }: CarFormProps) => {
         >
           {form.formState.isSubmitting ? (
             'Submitting...'
-          ) : `${type} Car `}</Button>
+          ) : `${type} Car `}
+        </Button>
       </form>
     </Form>
   )

@@ -20,14 +20,13 @@ const Profile = async ({ searchParams }: SearchParamProps) => {
     const orders = await getOrdersByUser({ userId, page: ordersPage})
 
     const orderedCars = orders?.data.map((order: IOrder) => order.car) || [];
-    // console.log(orderedCars);
 
 
 
     return (
         <>
             {/* My Rented Cars */}
-            <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+            <section className="bg-primary-50 py-1 md:py-2">
                 <div className="wrapper flex items-center justify-center sm:justify-between">
                     <h3 className='h3-bold text-center sm:text-left'>My Rented Cars</h3>
                     <Button asChild size="lg" className="button hidden sm:flex">
@@ -52,7 +51,7 @@ const Profile = async ({ searchParams }: SearchParamProps) => {
             </section>
 
             {/* My Added Cars */}
-            <section className="bg-primary-50 bg-dotted-pattern bg-cover bg-center py-5 md:py-10">
+            <section className="bg-primary-50 py-1 md:py-2">
                 <div className="wrapper flex items-center justify-center sm:justify-between">
                     <h3 className='h3-bold text-center sm:text-left'>My Added Cars</h3>
                     <Button asChild size="lg" className="button hidden sm:flex">

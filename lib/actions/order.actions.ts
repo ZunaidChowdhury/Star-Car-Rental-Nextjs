@@ -11,8 +11,9 @@ import User from '../database/models/user.model';
 import { ObjectId } from 'mongodb';
 
 export const checkoutOrder = async (order: CheckoutOrderParams) => {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+    // price is in cents so multiply by 100
     const price = Number(order.rentalCost) * 100;
     try {
         // Create Checkout Sessions from body params.
@@ -84,7 +85,7 @@ export async function getOrdersByCar({ searchString, carId }: GetOrdersByCarPara
                 $unwind: {
                     path: '$renter',
                 }
-                
+
             },
             {
                 $lookup: {
@@ -114,11 +115,11 @@ export async function getOrdersByCar({ searchString, carId }: GetOrdersByCarPara
                     },
                 },
             },
-            // {
-            //     $match: {
-            //         $and: [{ carId: carObjectId }, { renter: { $regex: RegExp(searchString, 'i') } }],
-            //     },
-            // },
+            {
+                $match: {
+                    $and: [{ carId: carObjectId }, { renter: { $regex: RegExp(searchString, 'i') } }],
+                },
+            },
         ])
         // console.log(`order 2`)
         // console.log(orders)
@@ -243,11 +244,27 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
                     select: '_id firstName lastName',
                 },
             })
-        // console.log(orders)
         const ordersCount = await Order.distinct('car._id').countDocuments(conditions)
-
         return { data: JSON.parse(JSON.stringify(orders)), totalPages: Math.ceil(ordersCount / limit) }
     } catch (error) {
         handleError(error)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

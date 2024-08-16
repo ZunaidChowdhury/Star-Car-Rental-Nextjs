@@ -24,7 +24,7 @@ export const DeleteConfirmation = ({ carId }: { carId: string }) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger>
-                <Image src="/jvm/icons/delete.svg" alt="edit" width={20} height={20} />
+                <Image src="/jvm/icons/delete.svg" alt="delete" width={20} height={20} />
             </AlertDialogTrigger>
 
             <AlertDialogContent className="bg-white">

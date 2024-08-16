@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
+    "@googlemaps/js-api-loader": "^1.16.8",
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "@radix-ui/react-alert-dialog": "^1.0.5",
@@ -21,6 +22,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@stripe/stripe-js": "^3.4.0",
+    "@types/google.maps": "^3.55.12",
     "@types/query-string": "^6.3.0",
     "@uploadthing/react": "^6.4.1",
     "class-variance-authority": "^0.7.0",
@@ -36,6 +38,7 @@
     "react-hook-form": "^7.51.2",
     "stripe": "^15.7.0",
     "svix": "^1.21.0",
+    "swiper": "^6.8.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.7.0",

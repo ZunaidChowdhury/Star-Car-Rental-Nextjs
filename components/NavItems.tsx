@@ -170,7 +170,7 @@ const NavItems = ({ isMobileScreen }: INavItemsProps) => {
                         {/* Car List */}
                         <li>
                             <DropdownMenu>
-                                <DropdownMenuTrigger className="group text-gray-300 hover:text-theme-primary border-0 rounded-none border-transparent border-b-4  hover:border-theme-primary transition duration-300 px-4 py-2 bg-black  outline-none focus:theme-primary data-[state=open]:theme-primary">
+                                <DropdownMenuTrigger className="dropdown-trigger group">
 
                                     <div className='flex'>
                                         <p>
@@ -180,7 +180,7 @@ const NavItems = ({ isMobileScreen }: INavItemsProps) => {
                                         <svg className="fill-[#D1D5DB] group-hover:fill-[#705CF6] transition duration-300" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-360 280-560h400L480-360Z" /></svg>
                                     </div>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className='max-h-[500px] overflow-auto'>
+                                <DropdownMenuContent className='max-h-[500px] overflow-y-auto'>
                                     {manufacturers.map((manufacturer, index) => (<Link href={`/brand/${manufacturer.modelUrl}`} key={manufacturer.modelUrl} >
                                         <DropdownMenuItem className='pl-4 focus:bg-theme-primary focus:text-white cursor-pointer'>{manufacturer.name}</DropdownMenuItem>
                                         {index != manufacturers.length - 1 ? <Separator className='w-full'/> : null}
@@ -212,6 +212,10 @@ const NavItems = ({ isMobileScreen }: INavItemsProps) => {
                                     </Link>))}
                                 </DropdownMenuContent>
                             </DropdownMenu>
+                        </li>
+
+                        <li>
+                            <Link href="/profile" className="nav-menu-item">My Profile</Link>
                         </li>
 
                         <li>
