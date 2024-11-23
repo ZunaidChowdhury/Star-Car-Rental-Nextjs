@@ -18,6 +18,8 @@ export default authMiddleware({
     '/api/webhooks/clerk',
     '/api/webhooks/stripe',
     '/api/uploadthing',
+    '/api/cars/:id',
+    '/api/cars',
   ],
 });
 

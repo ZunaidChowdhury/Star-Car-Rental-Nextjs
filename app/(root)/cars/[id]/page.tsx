@@ -3,19 +3,56 @@ import KeyIcon from '@/components/icons/KeyIcon';
 import CheckoutButton from '@/components/shared/CheckoutButton';
 import Collection from '@/components/shared/Collection';
 import { getCarById, getRelatedCarsByCategory } from '@/lib/actions/car.actions'
+import { ICar } from '@/lib/database/models/car.model';
 import { formatDateTime } from '@/lib/utils';
 import { SearchParamProps } from '@/types'
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import React from 'react'
 
-const CarDetails = async ({ params: { id }, searchParams }: SearchParamProps) => {
-  const car = await getCarById(id);
+export async function generateStaticParams() {
+  const res = await fetch(`${process.env.HOME_PATH}api/cars`);
+  const cars = await res.json();
+  // [{id: "1"}, {id: "2"}, ...]
+  return cars.map((car: any) => ({
+    id: car.id
+  }))
+}
+
+async function getCar(id: any) {
+  let res = await fetch(`${process.env.HOME_PATH}api/cars/${id}`, {
+    next: {
+      revalidate: 60
+    }
+  });
+
+  let car = await res.json();
+
+  if (!car) notFound()
+  return car
+
+  // if (!res.ok) {
+  //   notFound()
+  // }
+  // return res.json()
+
+
+
+}
+
+const CarDetails = async ({ params, searchParams }: any) => {
+
+  // using server actions 
+  // const car = await getCarById(id);
+
+  const car = await getCar(params.id);
 
   const relatedCars = await getRelatedCarsByCategory({
     categoryId: car.category._id,
     carId: car._id,
     page: searchParams.page as string,
   })
+
 
   return (
     <>
