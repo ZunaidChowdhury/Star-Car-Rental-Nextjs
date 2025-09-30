@@ -21,13 +21,28 @@ export default async function Home({ searchParams }: HomeProps) {
   })
   console.log(cars);
 
-  const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer || "",
-    year: searchParams.year || 2022,
-    fuel: searchParams.fuel || "",
-    limit: searchParams.limit || 10,
-    model: searchParams.model || "",
-  });
+  // const allCars = await fetchCars({
+  //   manufacturer: searchParams.manufacturer || "",
+  //   year: searchParams.year || 2022,
+  //   fuel: searchParams.fuel || "",
+  //   limit: searchParams.limit || 10,
+  //   model: searchParams.model || "",
+  // });
+
+
+
+  const allCars = [
+    { make: "Toyota", model: "Camry", year: 2020, city_mpg: 28, class: "midsize", combination_mpg: 32, cylinders: 4, displacement: 2.5, drive: "FWD", fuel_type: "Gasoline", highway_mpg: 39, transmission: "a" },
+    { make: "Honda", model: "Civic", year: 2019, city_mpg: 30, class: "compact", combination_mpg: 36, cylinders: 4, displacement: 2.0, drive: "FWD", fuel_type: "Gasoline", highway_mpg: 38, transmission: "a" },
+    { make: "Ford", model: "Mustang", year: 2021, city_mpg: 21, class: "sports", combination_mpg: 25, cylinders: 4, displacement: 2.3, drive: "RWD", fuel_type: "Gasoline", highway_mpg: 32, transmission: "m" },
+    { make: "Chevrolet", model: "Malibu", year: 2018, city_mpg: 27, class: "midsize", combination_mpg: 32, cylinders: 4, displacement: 1.5, drive: "FWD", fuel_type: "Gasoline", highway_mpg: 36, transmission: "a" },
+    { make: "Nissan", model: "Altima", year: 2020, city_mpg: 28, class: "midsize", combination_mpg: 32, cylinders: 4, displacement: 2.5, drive: "FWD", fuel_type: "Gasoline", highway_mpg: 39, transmission: "a" },
+    { make: "BMW", model: "3 Series", year: 2021, city_mpg: 26, class: "luxury", combination_mpg: 30, cylinders: 4, displacement: 2.0, drive: "RWD", fuel_type: "Gasoline", highway_mpg: 36, transmission: "a" },
+    { make: "Audi", model: "A4", year: 2019, city_mpg: 24, class: "luxury", combination_mpg: 30, cylinders: 4, displacement: 2.0, drive: "AWD", fuel_type: "Gasoline", highway_mpg: 34, transmission: "a" },
+    { make: "Mercedes-Benz", model: "C-Class", year: 2020, city_mpg: 25, class: "luxury", combination_mpg: 30, cylinders: 4, displacement: 2.0, drive: "RWD", fuel_type: "Gasoline", highway_mpg: 34, transmission: "a" },
+    { make: "Hyundai", model: "Elantra", year: 2018, city_mpg: 29, class: "compact", combination_mpg: 35, cylinders: 4, displacement: 2.0, drive: "FWD", fuel_type: "Gasoline", highway_mpg: 37, transmission: "a" },
+  ];
+
   // console.log(allCars);
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
@@ -89,7 +104,7 @@ export default async function Home({ searchParams }: HomeProps) {
           ) : (
             <div className="home__error-container">
               <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-              <p>{allCars?.message}</p>
+              {/* <p>{allCars?.message}</p> */}
             </div>
           )}
 
